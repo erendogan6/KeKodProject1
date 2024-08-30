@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
 
             menuItems.forEach { itemId ->
                 val switch = viewModel.switchModels.value?.find { it.id == itemId }
-                val title = switch?.name ?: "Main Screen"
+                val title = switch?.name ?: getString(R.string.main_screen)
                 val iconRes = switch?.iconRes ?: R.drawable.ic_home
                 add(0, itemId, Menu.NONE, title).setIcon(iconRes)
             }

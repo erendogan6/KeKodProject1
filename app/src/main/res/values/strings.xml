@@ -7,4 +7,6 @@
     <string name="switch_evolution">Evolution</string>
     <string name="switch_unknown">Unknown</string>
     <string name="welcome_fragment">Welcome To %1$s Fragment</string>
+    <string name="main_screen">Main Screen</string>
+    <string name="this_is_the_main_screen">Burası Ana Ekran</string>
 </resources>
