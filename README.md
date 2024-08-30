@@ -78,6 +78,7 @@ com.erendogan6.kekodproject1
 - **Jetpack Compose:** Modern ve duyarlı kullanıcı arayüzleri oluşturmak için kullanılan yeni nesil UI araç takımı.
 - **Jetpack Navigation:** Uygulama içi ekranlar arası güvenli ve yapılandırılmış gezinme sağlamak için kullanılan kütüphane.
 - **ViewBinding:** Görünümleri bağlamak için kullanılan kütüphane.
+- **Lottie Compose:** Animasyon göstermek için kullanılan kütüphane.
 - **Androidx:** Fragment, Core KTX, AppCompat, ConstraintLayout gibi Android bileşenleri içi.
 - **Material Components:** Google’ın Material Design yönergelerine uygun kullanıcı arayüzü bileşenleri.
 - **JUnit:** Java için birim testleri yazmak için kullanılan standart test kütüphanesi.
