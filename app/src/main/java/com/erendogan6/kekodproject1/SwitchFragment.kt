@@ -12,14 +12,10 @@ class SwitchFragment : Fragment(R.layout.fragment_switch) {
     companion object {
         private const val ARG_SWITCH_ID = "switch_id"
 
-        // Method to create a new instance of the fragment with the switch ID
-        fun newInstance(switchId: Int): SwitchFragment {
-            val fragment = SwitchFragment()
-            val args = Bundle()
-            args.putInt(ARG_SWITCH_ID, switchId)
-            fragment.arguments = args
-            return fragment
-        }
+        fun newInstance(switchId: Int) =
+            SwitchFragment().apply {
+                arguments = Bundle().apply { putInt(ARG_SWITCH_ID, switchId) }
+            }
     }
 
     override fun onViewCreated(
@@ -27,23 +23,19 @@ class SwitchFragment : Fragment(R.layout.fragment_switch) {
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentSwitchBinding.bind(view) // Initialize ViewBinding
+        _binding = FragmentSwitchBinding.bind(view)
 
-        val switchId = arguments?.getInt(ARG_SWITCH_ID) ?: -1
+        val switchName =
+            when (arguments?.getInt(ARG_SWITCH_ID) ?: -1) {
+                1 -> "Happy"
+                2 -> "Money"
+                3 -> "Peace"
+                4 -> "Friend"
+                5 -> "Evolution"
+                else -> "Unknown"
+            }
 
-        val text =
-            "Welcome To " +
-                when (switchId) {
-                    1 -> "Happy"
-                    2 -> "Money"
-                    3 -> "Peace"
-                    4 -> "Friend"
-                    5 -> "Evolution"
-                    else -> "Unknown"
-                } + " Fragment"
-
-        // Display content based on the switch ID
-        binding.textSwitchDetail.text = text
+        binding.textSwitchDetail.text = "Welcome To $switchName Fragment"
     }
 
     override fun onDestroyView() {
