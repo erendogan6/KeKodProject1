@@ -7,18 +7,18 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:padding="24dp"
-    android:background="#3300BCD4">
+    android:background="@color/background">
 
     <!-- Main Screen Title with Elevated Style -->
     <TextView
-        android:id="@+id/text_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="This is the Main Screen"
-        android:textSize="24sp"
+        android:textSize="26sp"
         android:textStyle="bold"
         android:textColor="?attr/colorPrimary"
         android:fontFamily="@font/poppins_medium"
+        android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
         android:elevation="6dp"
         android:letterSpacing="0.1"
@@ -28,21 +28,23 @@
         android:shadowRadius="4" />
 
     <!-- Ego Switch with Icon -->
-    <com.google.android.material.switchmaterial.SwitchMaterial
+    <com.google.android.material.materialswitch.MaterialSwitch
         android:id="@+id/switchEgo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ego"
+        android:textSize="22sp"
+        android:textStyle="italic"
+        android:textColor="@color/switchTextColor"
         app:switchPadding="15dp"
         android:drawableStart="@drawable/ic_person"
         android:drawablePadding="15dp"
-        android:textSize="18sp"
-        android:textColor="?android:textColorPrimary"
         android:checked="true"
-        android:thumbTint="?attr/colorAccent"
-        android:trackTint="@color/colorAccentVariant"
+        android:thumbTint="@color/switchThumbColor"
+        android:trackTint="@color/switchTrackColor"
+        android:drawableTint="#FF0000"
         android:layout_marginBottom="24dp"
-        android:iconTint="?attr/colorPrimary"
+        android:iconTint="@color/switchIconColor"
         android:layout_gravity="center_horizontal"
         android:elevation="4dp" />
 
@@ -50,7 +52,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="?attr/colorPrimaryVariant"
+        android:background="?attr/colorPrimary"
         android:layout_marginVertical="16dp" />
 
     <!-- Switches Group with Rounded Corners and Gradient Background -->
@@ -64,84 +66,93 @@
         android:elevation="4dp">
 
         <!-- Switch 1 -->
-        <com.google.android.material.switchmaterial.SwitchMaterial
+        <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_happy"
             android:drawablePadding="15dp"
-            android:text="Happy "
-            android:textSize="16sp"
+            android:text="Happy"
+            android:textSize="22sp"
             app:switchPadding="15dp"
-            android:textColor="?android:textColorPrimary"
+            android:textColor="@color/switchTextColor"
             android:enabled="false"
-            android:thumbTint="?attr/colorAccent"
-            android:trackTint="@color/colorAccentVariant"
+            android:textStyle="italic"
+            android:thumbTint="@color/switchThumbColorDisabled"
+            android:trackTint="@color/switchTrackColorDisabled"
+            android:drawableTint="@color/switchIconColor"
             android:layout_marginBottom="12dp" />
 
         <!-- Switch 2 -->
-        <com.google.android.material.switchmaterial.SwitchMaterial
+        <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/switch2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Money "
-            android:textSize="16sp"
+            android:text="Money"
+            android:textSize="22sp"
             android:drawablePadding="15dp"
             app:switchPadding="15dp"
             android:drawableStart="@drawable/ic_money"
-            android:textColor="?android:textColorPrimary"
+            android:textColor="@color/switchTextColor"
             android:enabled="false"
-            android:thumbTint="?attr/colorAccent"
-            android:trackTint="@color/colorAccentVariant"
+            android:drawableTint="@color/switchIconColor"
+            android:textStyle="italic"
+            android:thumbTint="@color/switchThumbColorDisabled"
+            android:trackTint="@color/switchTrackColorDisabled"
             android:layout_marginBottom="12dp" />
 
         <!-- Switch 3 -->
-        <com.google.android.material.switchmaterial.SwitchMaterial
+        <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/switch3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_peace"
-            android:text="Peace "
-            android:textSize="16sp"
+            android:text="Peace"
+            android:textSize="22sp"
+            android:drawableTint="@color/switchIconColor"
             app:switchPadding="15dp"
             android:drawablePadding="15dp"
-            android:textColor="?android:textColorPrimary"
+            android:textColor="@color/switchTextColor"
             android:enabled="false"
-            android:thumbTint="?attr/colorAccent"
-            android:trackTint="@color/colorAccentVariant"
+            android:textStyle="italic"
+            android:thumbTint="@color/switchThumbColorDisabled"
+            android:trackTint="@color/switchTrackColorDisabled"
             android:layout_marginBottom="12dp" />
 
         <!-- Switch 4 -->
-        <com.google.android.material.switchmaterial.SwitchMaterial
+        <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/switch4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_friend"
             android:drawablePadding="15dp"
-            android:text="Friend "
-            android:textSize="16sp"
+            android:text="Friend"
+            android:textSize="22sp"
             app:switchPadding="15dp"
-            android:textColor="?android:textColorPrimary"
+            android:drawableTint="@color/switchIconColor"
+            android:textColor="@color/switchTextColor"
             android:enabled="false"
-            android:thumbTint="?attr/colorAccent"
-            android:trackTint="@color/colorAccentVariant"
+            android:textStyle="italic"
+            android:thumbTint="@color/switchThumbColorDisabled"
+            android:trackTint="@color/switchTrackColorDisabled"
             android:layout_marginBottom="12dp" />
 
         <!-- Switch 5 -->
-        <com.google.android.material.switchmaterial.SwitchMaterial
+        <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/switch5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_evolution"
             android:drawablePadding="15dp"
-            android:text="Evolution "
-            android:textSize="16sp"
+            android:text="Evolution"
+            android:textSize="22sp"
             app:switchPadding="15dp"
-
-            android:textColor="?android:textColorPrimary"
+            android:drawableTint="@color/switchIconColor"
+            android:textColor="@color/switchTextColor"
+            android:textStyle="italic"
             android:enabled="false"
-            android:thumbTint="?attr/colorAccent"
-            android:trackTint="@color/colorAccentVariant"
+            android:thumbTint="@color/switchThumbColorDisabled"
+            android:trackTint="@color/switchTrackColorDisabled"
             android:layout_marginBottom="12dp" />
     </LinearLayout>
 </LinearLayout>
