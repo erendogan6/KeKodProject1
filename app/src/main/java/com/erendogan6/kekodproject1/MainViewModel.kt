@@ -6,14 +6,14 @@ import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
     // LiveData to hold the state of switches
-    private val _isEgoSwitchOn = MutableLiveData<Boolean>(true)
+    private val _isEgoSwitchOn = MutableLiveData(true)
     val isEgoSwitchOn: LiveData<Boolean> = _isEgoSwitchOn
 
     private val _switchStates = MutableLiveData<Map<Int, Boolean>>()
     val switchStates: LiveData<Map<Int, Boolean>> = _switchStates
 
     // Active Menu Items to be shown in BottomNavigationView (mutable list with the main screen initially)
-    private val _activeMenuItems = MutableLiveData<MutableList<Int>>(mutableListOf(R.id.nav_main_screen))
+    private val _activeMenuItems = MutableLiveData(mutableListOf(R.id.nav_main_screen))
     val activeMenuItems: LiveData<MutableList<Int>> = _activeMenuItems
 
     // List to keep track of the switches in the order they were turned ON

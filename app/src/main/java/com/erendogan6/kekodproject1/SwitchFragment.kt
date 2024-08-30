@@ -1,14 +1,14 @@
 package com.erendogan6.kekodproject1
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import com.erendogan6.kekodproject1.databinding.FragmentSwitchBinding
 
-class SwitchFragment : Fragment(R.layout.fragment_switch) {
-    private var _binding: FragmentSwitchBinding? = null
-    private val binding get() = _binding!!
-
+class SwitchFragment : Fragment() {
     companion object {
         private const val ARG_SWITCH_ID = "switch_id"
 
@@ -18,28 +18,30 @@ class SwitchFragment : Fragment(R.layout.fragment_switch) {
             }
     }
 
-    override fun onViewCreated(
-        view: View,
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ) {
-        super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentSwitchBinding.bind(view)
+    ): View {
+        val switchId = arguments?.getInt(ARG_SWITCH_ID) ?: -1
 
-        val switchName =
-            when (arguments?.getInt(ARG_SWITCH_ID) ?: -1) {
-                1 -> "Happy"
-                2 -> "Money"
-                3 -> "Peace"
-                4 -> "Friend"
-                5 -> "Evolution"
-                else -> "Unknown"
+        val (switchName, iconRes) =
+            when (switchId) {
+                1 -> "Happy" to R.drawable.ic_happy
+                2 -> "Money" to R.drawable.ic_money
+                3 -> "Peace" to R.drawable.ic_peace
+                4 -> "Friend" to R.drawable.ic_friend
+                5 -> "Evolution" to R.drawable.ic_evolution
+                else -> "Unknown" to R.drawable.ic_home
             }
 
-        binding.textSwitchDetail.text = "Welcome To $switchName Fragment"
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null // Avoid memory leaks by clearing the binding reference
+        // Return a ComposeView instead of an XML-based layout
+        return ComposeView(requireContext()).apply {
+            setContent {
+                MaterialTheme {
+                    switchFragmentContent(switchName, iconRes)
+                }
+            }
+        }
     }
 }
