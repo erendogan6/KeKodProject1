@@ -1,6 +1,14 @@
 # Hafta 1 Projesi - Switch ve BottomNavigationBar Uygulaması
 
+ <img src="https://i.hizliresim.com/8jvow1b.png" width="200" height="200">
+
+
 Bu proje, **KeKod Grubu** tarafından düzenlenen **ilk hafta proje yarışması** kapsamında geliştirilmiştir. Uygulama, **Jetpack Compose**, **Jetpack Navigation** ve **ViewBinding/DataBinding** gibi modern Android bileşenlerini kullanarak oluşturulmuş bir Android uygulamasıdır.
+
+
+## Kullanım Videosu
+
+<a href="https://www.youtube.com/shorts/CN-bCs214Kk"> <img src="https://i.hizliresim.com/g4kheua.png" alt="Seyahat Asistanım Kullanım Videosu" width="320" height="680">  </a> 
 
 ## Proje Gereksinimleri ve Hedefleri
 
