@@ -1,13 +1,13 @@
 package com.erendogan6.kekodproject1
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.erendogan6.kekodproject1.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
 
@@ -17,19 +17,33 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Observe the Ego switch state
-        viewModel.isEgoSwitchOn.observe(this, Observer { isOn ->
-            binding.switchEgo.isChecked = isOn
-            setSwitchesEnabled(!isOn) // Disable/Enable other switches based on Ego state
-        })
+        viewModel.isEgoSwitchOn.observe(
+            this,
+            Observer { isOn ->
+                binding.switchEgo.isChecked = isOn
+                setSwitchesEnabled(!isOn) // Disable/Enable other switches based on Ego state
+            },
+        )
+
+        // Observe the BottomNavigationView visibility
+        viewModel.isBottomNavVisible.observe(
+            this,
+            Observer { isVisible ->
+                binding.bottomNavigationView.visibility = if (isVisible) View.VISIBLE else View.GONE
+            },
+        )
 
         // Observe the state of other switches
-        viewModel.switchStates.observe(this, Observer { states ->
-            binding.switch1.isChecked = states[1] ?: false
-            binding.switch2.isChecked = states[2] ?: false
-            binding.switch3.isChecked = states[3] ?: false
-            binding.switch4.isChecked = states[4] ?: false
-            binding.switch5.isChecked = states[5] ?: false
-        })
+        viewModel.switchStates.observe(
+            this,
+            Observer { states ->
+                binding.switch1.isChecked = states[1] ?: false
+                binding.switch2.isChecked = states[2] ?: false
+                binding.switch3.isChecked = states[3] ?: false
+                binding.switch4.isChecked = states[4] ?: false
+                binding.switch5.isChecked = states[5] ?: false
+            },
+        )
 
         // Set listener for Ego switch
         binding.switchEgo.setOnCheckedChangeListener { _, isChecked ->
