@@ -5,23 +5,27 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
-
     // LiveData to hold the state of switches
     private val _isEgoSwitchOn = MutableLiveData<Boolean>(true)
     val isEgoSwitchOn: LiveData<Boolean> = _isEgoSwitchOn
+
+    // LiveData for BottomNavigationView visibility
+    private val _isBottomNavVisible = MutableLiveData<Boolean>(false)
+    val isBottomNavVisible: LiveData<Boolean> = _isBottomNavVisible
 
     private val _switchStates = MutableLiveData<Map<Int, Boolean>>()
     val switchStates: LiveData<Map<Int, Boolean>> = _switchStates
 
     init {
         // Initialize all switches to be off, except the "Ego" switch
-        _switchStates.value = mapOf(
-            1 to false,  // Switch 1
-            2 to false,  // Switch 2
-            3 to false,  // Switch 3
-            4 to false,  // Switch 4
-            5 to false   // Switch 5
-        )
+        _switchStates.value =
+            mapOf(
+                1 to false, // Switch 1
+                2 to false, // Switch 2
+                3 to false, // Switch 3
+                4 to false, // Switch 4
+                5 to false, // Switch 5
+            )
     }
 
     // Method to handle changes in "Ego" switch
@@ -30,15 +34,22 @@ class MainViewModel : ViewModel() {
         if (isOn) {
             // If Ego switch is on, disable all other switches
             _switchStates.value = _switchStates.value?.mapValues { false }
+            _isBottomNavVisible.value = false // Hide BottomNavigationView
+        } else {
+            _isBottomNavVisible.value = true // Show BottomNavigationView
         }
     }
 
     // Method to handle changes in other switches
-    fun onSwitchChanged(switchId: Int, isOn: Boolean) {
-        if (_isEgoSwitchOn.value == true) return  // Do nothing if Ego switch is on
+    fun onSwitchChanged(
+        switchId: Int,
+        isOn: Boolean,
+    ) {
+        if (_isEgoSwitchOn.value == true) return // Do nothing if Ego switch is on
 
-        _switchStates.value = _switchStates.value?.toMutableMap()?.apply {
-            this[switchId] = isOn
-        }
+        _switchStates.value =
+            _switchStates.value?.toMutableMap()?.apply {
+                this[switchId] = isOn
+            }
     }
 }
