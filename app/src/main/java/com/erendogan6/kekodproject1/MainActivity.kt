@@ -96,25 +96,27 @@ class MainActivity : AppCompatActivity() {
 
         // Add dynamic items based on the active switches
         menuItems.forEach { switchId ->
-            val title =
-                when (switchId) {
-                    1 -> "Switch 1"
-                    2 -> "Switch 2"
-                    3 -> "Switch 3"
-                    4 -> "Switch 4"
-                    5 -> "Switch 5"
-                    else -> ""
-                }
-            val iconRes =
-                when (switchId) {
-                    1 -> R.drawable.ic_happy
-                    2 -> R.drawable.ic_money
-                    3 -> R.drawable.ic_peace
-                    4 -> R.drawable.ic_friend
-                    5 -> R.drawable.ic_evolution
-                    else -> R.drawable.ic_home
-                }
-            menu.add(0, switchId, Menu.NONE, title).setIcon(iconRes)
+            if (switchId != R.id.nav_main_screen) { // Do not re-add the main screen
+                val title =
+                    when (switchId) {
+                        1 -> "Switch 1"
+                        2 -> "Switch 2"
+                        3 -> "Switch 3"
+                        4 -> "Switch 4"
+                        5 -> "Switch 5"
+                        else -> ""
+                    }
+                val iconRes =
+                    when (switchId) {
+                        1 -> R.drawable.ic_happy
+                        2 -> R.drawable.ic_money
+                        3 -> R.drawable.ic_peace
+                        4 -> R.drawable.ic_friend
+                        5 -> R.drawable.ic_evolution
+                        else -> R.drawable.ic_home
+                    }
+                menu.add(0, switchId, Menu.NONE, title).setIcon(iconRes)
+            }
         }
     }
 }
