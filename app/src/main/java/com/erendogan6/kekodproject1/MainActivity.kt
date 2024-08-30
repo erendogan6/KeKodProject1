@@ -1,6 +1,7 @@
 package com.erendogan6.kekodproject1
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -45,6 +46,14 @@ class MainActivity : AppCompatActivity() {
             },
         )
 
+        // Observe the active menu items and update BottomNavigationView
+        viewModel.activeMenuItems.observe(
+            this,
+            Observer { menuItems ->
+                updateBottomNavigationMenu(menuItems)
+            },
+        )
+
         // Set listener for Ego switch
         binding.switchEgo.setOnCheckedChangeListener { _, isChecked ->
             viewModel.onEgoSwitchChanged(isChecked)
@@ -75,5 +84,37 @@ class MainActivity : AppCompatActivity() {
         binding.switch3.isEnabled = enabled
         binding.switch4.isEnabled = enabled
         binding.switch5.isEnabled = enabled
+    }
+
+    // Method to update the BottomNavigationView menu dynamically
+    private fun updateBottomNavigationMenu(menuItems: List<Int>) {
+        val menu = binding.bottomNavigationView.menu
+        menu.clear() // Clear existing items
+
+        // Add the main screen item
+        menu.add(0, R.id.nav_main_screen, Menu.NONE, "Main Screen").setIcon(R.drawable.ic_home)
+
+        // Add dynamic items based on the active switches
+        menuItems.forEach { switchId ->
+            val title =
+                when (switchId) {
+                    1 -> "Switch 1"
+                    2 -> "Switch 2"
+                    3 -> "Switch 3"
+                    4 -> "Switch 4"
+                    5 -> "Switch 5"
+                    else -> ""
+                }
+            val iconRes =
+                when (switchId) {
+                    1 -> R.drawable.ic_happy
+                    2 -> R.drawable.ic_money
+                    3 -> R.drawable.ic_peace
+                    4 -> R.drawable.ic_friend
+                    5 -> R.drawable.ic_evolution
+                    else -> R.drawable.ic_home
+                }
+            menu.add(0, switchId, Menu.NONE, title).setIcon(iconRes)
+        }
     }
 }
