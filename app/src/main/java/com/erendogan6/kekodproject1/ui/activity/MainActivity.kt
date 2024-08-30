@@ -1,4 +1,4 @@
-package com.erendogan6.kekodproject1
+package com.erendogan6.kekodproject1.ui.activity
 
 import android.os.Bundle
 import android.view.Menu
@@ -7,13 +7,18 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.erendogan6.kekodproject1.R
 import com.erendogan6.kekodproject1.databinding.ActivityMainBinding
+import com.erendogan6.kekodproject1.ui.fragment.MainFragment
+import com.erendogan6.kekodproject1.ui.fragment.SwitchFragment
+import com.erendogan6.kekodproject1.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainViewModel by viewModels()
-    private var lastSelectedItemId: Int = R.id.nav_main_screen
+    private var lastSelectedItemId: Int =
+        R.id.nav_main_screen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

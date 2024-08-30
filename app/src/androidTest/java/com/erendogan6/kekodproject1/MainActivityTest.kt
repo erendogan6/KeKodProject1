@@ -17,6 +17,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.erendogan6.kekodproject1.ui.activity.MainActivity
 import org.hamcrest.Matchers.allOf
 import org.junit.Before
 import org.junit.Rule

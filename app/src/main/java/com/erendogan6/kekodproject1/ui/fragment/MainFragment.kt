@@ -1,10 +1,13 @@
-package com.erendogan6.kekodproject1
+package com.erendogan6.kekodproject1.ui.fragment
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.erendogan6.kekodproject1.R
 import com.erendogan6.kekodproject1.databinding.FragmentMainBinding
+import com.erendogan6.kekodproject1.ui.activity.MainActivity
+import com.erendogan6.kekodproject1.viewmodel.MainViewModel
 
 class MainFragment : Fragment(R.layout.fragment_main) {
     private var _binding: FragmentMainBinding? = null

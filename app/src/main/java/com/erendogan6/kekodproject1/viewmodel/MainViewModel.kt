@@ -1,19 +1,40 @@
-package com.erendogan6.kekodproject1
+package com.erendogan6.kekodproject1.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.erendogan6.kekodproject1.R
 import com.erendogan6.kekodproject1.model.SwitchModel
 
 class MainViewModel : ViewModel() {
     private val _switchModels =
         MutableLiveData(
             listOf(
-                SwitchModel(1, "Happy", R.drawable.ic_happy),
-                SwitchModel(2, "Money", R.drawable.ic_money),
-                SwitchModel(3, "Peace", R.drawable.ic_peace),
-                SwitchModel(4, "Friend", R.drawable.ic_friend),
-                SwitchModel(5, "Evolution", R.drawable.ic_evolution),
+                SwitchModel(
+                    1,
+                    "Happy",
+                    R.drawable.ic_happy,
+                ),
+                SwitchModel(
+                    2,
+                    "Money",
+                    R.drawable.ic_money,
+                ),
+                SwitchModel(
+                    3,
+                    "Peace",
+                    R.drawable.ic_peace,
+                ),
+                SwitchModel(
+                    4,
+                    "Friend",
+                    R.drawable.ic_friend,
+                ),
+                SwitchModel(
+                    5,
+                    "Evolution",
+                    R.drawable.ic_evolution,
+                ),
             ),
         )
     val switchModels: LiveData<List<SwitchModel>> = _switchModels

@@ -1,4 +1,4 @@
-package com.erendogan6.kekodproject1
+package com.erendogan6.kekodproject1.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.erendogan6.kekodproject1.R
 
 @Composable
 fun switchFragmentContent(

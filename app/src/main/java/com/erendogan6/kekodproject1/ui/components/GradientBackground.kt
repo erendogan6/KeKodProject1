@@ -1,4 +1,4 @@
-package com.erendogan6.kekodproject1
+package com.erendogan6.kekodproject1.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

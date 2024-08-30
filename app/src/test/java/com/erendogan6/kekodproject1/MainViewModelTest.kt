@@ -2,6 +2,7 @@ package com.erendogan6.kekodproject1
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.erendogan6.kekodproject1.viewmodel.MainViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue

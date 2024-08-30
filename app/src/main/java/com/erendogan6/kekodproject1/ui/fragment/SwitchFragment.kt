@@ -1,4 +1,4 @@
-package com.erendogan6.kekodproject1
+package com.erendogan6.kekodproject1.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import com.erendogan6.kekodproject1.R
+import com.erendogan6.kekodproject1.ui.components.switchFragmentContent
 
 class SwitchFragment : Fragment() {
     companion object {
