@@ -49,6 +49,7 @@ com.erendogan6.kekodproject1
 │   │   └── MainActivity.kt             # Ana aktivite, uygulamanın başlangıç noktası.
 │   │
 │   ├── components
+│   │   ├── LottieLoadingScreen.kt      # Animasyon gösterimi için kullanılan Lottie Compose Sınıfı.
 │   │   ├── GradientBackground.kt       # Arka plan geçişlerini yöneten sınıf.
 │   │   └── SwitchScreen.kt             # Jetpack Compose kullanılarak oluşturulan switch ekranı bileşeni.
 │   │
