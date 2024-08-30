@@ -14,6 +14,7 @@ constraintlayout = "2.1.4"
 material3 = "1.2.1"
 mockitoKotlinVersion = "5.4.0"
 uiTextAndroid = "1.6.8"
+coreKtxVersion = "1.6.1"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
@@ -36,6 +37,7 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 mockito-android = { module = "org.mockito:mockito-android", version = "5.13.0" }
 mockito-core = { module = "org.mockito:mockito-core", version = "5.13.0" }
+core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtxVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -30,6 +31,9 @@ fun switchFragmentContent(
     switchName: String,
     iconRes: Int,
 ) {
+    val context = LocalContext.current
+    val welcomeText = context.getString(R.string.welcome_fragment, switchName)
+
     gradientBackground {
         Column(
             modifier =
@@ -52,7 +56,7 @@ fun switchFragmentContent(
 
             // Text for Detail Screen
             Text(
-                text = "Welcome To $switchName Fragment",
+                text = welcomeText,
                 style =
                     MaterialTheme.typography.bodyLarge.copy(
                         fontFamily = FontFamily(Font(R.font.poppins_medium)),

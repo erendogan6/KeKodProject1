@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.activity.compose)
+    implementation libs.core.ktx
 
     // Test
     debugImplementation libs.androidx.ui.test.manifest

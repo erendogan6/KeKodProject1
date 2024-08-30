@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Anahtar ve AltGezinmeÇubuğu Uygulaması</string>
+    <string name="switch_happy">Mutlu</string>
+    <string name="switch_money">Para</string>
+    <string name="switch_peace">Barış</string>
+    <string name="switch_friend">Arkadaş</string>
+    <string name="switch_evolution">Evrim</string>
+    <string name="switch_unknown">Bilinmeyen</string>
+    <string name="welcome_fragment">%1$s Fragmentine Hoş Geldiniz</string>
+</resources>

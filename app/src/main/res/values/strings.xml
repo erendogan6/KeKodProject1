@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">KeKodProject1</string>
+    <string name="app_name">Switch and BottomNavigationBar App</string>
+    <string name="switch_happy">Happy</string>
+    <string name="switch_money">Money</string>
+    <string name="switch_peace">Peace</string>
+    <string name="switch_friend">Friend</string>
+    <string name="switch_evolution">Evolution</string>
+    <string name="switch_unknown">Unknown</string>
+    <string name="welcome_fragment">Welcome To %1$s Fragment</string>
 </resources>

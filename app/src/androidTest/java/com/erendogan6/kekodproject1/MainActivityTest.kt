@@ -1,7 +1,9 @@
 package com.erendogan6.kekodproject1
 
+import android.content.Context
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
@@ -32,6 +34,13 @@ class MainActivityTest {
 
     @get:Rule
     val composeTestRule = createAndroidComposeRule<MainActivity>()
+
+    private lateinit var context: Context
+
+    @Before
+    fun setup() {
+        context = ApplicationProvider.getApplicationContext()
+    }
 
     @Test
     fun testEgoSwitchInitialCondition() {
@@ -69,15 +78,15 @@ class MainActivityTest {
 
         // Turn on switch 1 and check if the icon is added to BottomNavigationView
         onView(withId(R.id.switch1)).perform(click())
-        onView(allOf(withId(R.id.switch1), withText("Happy"))).perform(click())
+        onView(allOf(withId(R.id.switch1), withText(context.getString(R.string.switch_happy)))).perform(click())
 
         // Turn on switch 2 and check if the icon is added to BottomNavigationView
         onView(withId(R.id.switch2)).perform(click())
-        onView(allOf(withId(R.id.switch2), withText("Money"))).perform(click())
+        onView(allOf(withId(R.id.switch2), withText(context.getString(R.string.switch_money)))).perform(click())
 
         // Turn on switch 3 and check if the icon is added to BottomNavigationView
         onView(withId(R.id.switch3)).perform(click())
-        onView(allOf(withId(R.id.switch3), withText("Peace"))).perform(click())
+        onView(allOf(withId(R.id.switch3), withText(context.getString(R.string.switch_peace)))).perform(click())
     }
 
     @Test
@@ -96,7 +105,7 @@ class MainActivityTest {
         onView(withId(R.id.switch1)).check(matches(isNotChecked()))
 
         // Check that the "Happy" text does not exist in the BottomNavigationView
-        onView(allOf(withText("Happy"), isDescendantOfA(withId(R.id.bottomNavigationView))))
+        onView(allOf(withText(context.getString(R.string.switch_happy)), isDescendantOfA(withId(R.id.bottomNavigationView))))
             .check(doesNotExist())
     }
 
@@ -113,7 +122,7 @@ class MainActivityTest {
         // Click on "Happy" navigation item within BottomNavigationView using Espresso
         onView(
             allOf(
-                withText("Happy"),
+                withText(context.getString(R.string.switch_happy)),
                 isDescendantOfA(withId(R.id.bottomNavigationView)),
                 withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE),
             ),
@@ -125,7 +134,10 @@ class MainActivityTest {
         composeTestRule.waitForIdle()
 
         // Check if "Welcome To Happy Fragment" is displayed using Compose testing APIs
-        composeTestRule.onNodeWithText("Welcome To Happy Fragment").assertExists()
+        composeTestRule
+            .onNodeWithText(
+                context.getString(R.string.welcome_fragment, context.getString(R.string.switch_happy)),
+            ).assertExists()
     }
 
     @Before

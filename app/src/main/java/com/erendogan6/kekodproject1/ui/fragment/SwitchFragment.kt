@@ -27,21 +27,21 @@ class SwitchFragment : Fragment() {
     ): View {
         val switchId = arguments?.getInt(ARG_SWITCH_ID) ?: -1
 
-        val (switchName, iconRes) =
+        val (switchNameRes, iconRes) =
             when (switchId) {
-                1 -> "Happy" to R.drawable.ic_happy
-                2 -> "Money" to R.drawable.ic_money
-                3 -> "Peace" to R.drawable.ic_peace
-                4 -> "Friend" to R.drawable.ic_friend
-                5 -> "Evolution" to R.drawable.ic_evolution
-                else -> "Unknown" to R.drawable.ic_home
+                1 -> R.string.switch_happy to R.drawable.ic_happy
+                2 -> R.string.switch_money to R.drawable.ic_money
+                3 -> R.string.switch_peace to R.drawable.ic_peace
+                4 -> R.string.switch_friend to R.drawable.ic_friend
+                5 -> R.string.switch_evolution to R.drawable.ic_evolution
+                else -> R.string.switch_unknown to R.drawable.ic_home
             }
 
         // Return a ComposeView instead of an XML-based layout
         return ComposeView(requireContext()).apply {
             setContent {
                 MaterialTheme {
-                    switchFragmentContent(switchName, iconRes)
+                    switchFragmentContent(getString(switchNameRes), iconRes)
                 }
             }
         }

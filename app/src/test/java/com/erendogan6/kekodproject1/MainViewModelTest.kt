@@ -1,5 +1,6 @@
 package com.erendogan6.kekodproject1
 
+import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.erendogan6.kekodproject1.viewmodel.MainViewModel
@@ -13,6 +14,7 @@ import org.mockito.Mock
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.mockito.kotlin.argumentCaptor
 
@@ -25,10 +27,25 @@ class MainViewModelTest {
     @Mock
     private lateinit var menuObserver: Observer<List<Int>>
 
+    @Mock
+    private lateinit var context: Application
+
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        viewModel = MainViewModel()
+
+        // Mock the Application context
+        context = mock(Application::class.java)
+
+        // Mock the getString(...) calls to return some dummy values
+        `when`(context.getString(R.string.switch_happy)).thenReturn("Happy")
+        `when`(context.getString(R.string.switch_money)).thenReturn("Money")
+        `when`(context.getString(R.string.switch_peace)).thenReturn("Peace")
+        `when`(context.getString(R.string.switch_friend)).thenReturn("Friend")
+        `when`(context.getString(R.string.switch_evolution)).thenReturn("Evolution")
+
+        // Initialize the ViewModel with the mocked context
+        viewModel = MainViewModel(context)
     }
 
     @Test
