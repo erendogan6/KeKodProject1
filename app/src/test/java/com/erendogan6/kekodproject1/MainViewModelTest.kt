@@ -41,7 +41,11 @@ class MainViewModelTest {
     fun `test switches cannot be enabled when Ego is on`() {
         viewModel.onEgoSwitchChanged(true) // Ego switch on
         viewModel.onSwitchChanged(1, true)
-        assertTrue(viewModel.switchStates.value?.get(1) == false) // Switch should remain off
+        assertTrue(
+            viewModel.switchModels.value
+                ?.get(0)
+                ?.isChecked == false,
+        ) // Switch 1 should not be enabled
     }
 
     @Test

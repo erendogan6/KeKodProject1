@@ -48,15 +48,9 @@ class MainActivity : AppCompatActivity() {
             clear() // Clear existing items
 
             menuItems.forEach { itemId ->
-                val (title, iconRes) =
-                    when (itemId) {
-                        1 -> "Happy" to R.drawable.ic_happy
-                        2 -> "Money" to R.drawable.ic_money
-                        3 -> "Peace" to R.drawable.ic_peace
-                        4 -> "Friend" to R.drawable.ic_friend
-                        5 -> "Evolution" to R.drawable.ic_evolution
-                        else -> "Main Screen" to R.drawable.ic_home
-                    }
+                val switch = viewModel.switchModels.value?.find { it.id == itemId }
+                val title = switch?.name ?: "Main Screen"
+                val iconRes = switch?.iconRes ?: R.drawable.ic_home
                 add(0, itemId, Menu.NONE, title).setIcon(iconRes)
             }
         }

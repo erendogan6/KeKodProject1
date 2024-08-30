@@ -3,42 +3,34 @@ package com.erendogan6.kekodproject1
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.erendogan6.kekodproject1.model.SwitchModel
 
 class MainViewModel : ViewModel() {
-    // LiveData to hold the state of switches
+    private val _switchModels =
+        MutableLiveData(
+            listOf(
+                SwitchModel(1, "Happy", R.drawable.ic_happy),
+                SwitchModel(2, "Money", R.drawable.ic_money),
+                SwitchModel(3, "Peace", R.drawable.ic_peace),
+                SwitchModel(4, "Friend", R.drawable.ic_friend),
+                SwitchModel(5, "Evolution", R.drawable.ic_evolution),
+            ),
+        )
+    val switchModels: LiveData<List<SwitchModel>> = _switchModels
+
     private val _isEgoSwitchOn = MutableLiveData(true)
     val isEgoSwitchOn: LiveData<Boolean> = _isEgoSwitchOn
 
-    private val _switchStates = MutableLiveData<Map<Int, Boolean>>()
-    val switchStates: LiveData<Map<Int, Boolean>> = _switchStates
-
-    // Active Menu Items to be shown in BottomNavigationView (mutable list with the main screen initially)
     private val _activeMenuItems = MutableLiveData(mutableListOf(R.id.nav_main_screen))
     val activeMenuItems: LiveData<MutableList<Int>> = _activeMenuItems
 
     // List to keep track of the switches in the order they were turned ON
     private val _switchHistory = mutableListOf<Int>()
 
-    init {
-        // Initialize all switches to be off, except the "Ego" switch
-        _switchStates.value =
-            mapOf(
-                1 to false,
-                2 to false,
-                3 to false,
-                4 to false,
-                5 to false,
-            )
-    }
-
-    // Method to handle changes in "Ego" switch
     fun onEgoSwitchChanged(isOn: Boolean) {
         _isEgoSwitchOn.value = isOn
         if (isOn) {
-            // If Ego switch is on, disable all other switches
-            _switchStates.value = _switchStates.value?.mapValues { false }
-            _switchHistory.clear() // Clear history when "Ego" switch is turned ON
-            _activeMenuItems.value = mutableListOf(R.id.nav_main_screen) // Reset to main screen only
+            resetSwitches()
         }
     }
 
@@ -49,9 +41,9 @@ class MainViewModel : ViewModel() {
     ) {
         if (_isEgoSwitchOn.value == true) return // Do nothing if Ego switch is on
 
-        _switchStates.value =
-            _switchStates.value?.toMutableMap()?.apply {
-                this[switchId] = isOn
+        _switchModels.value =
+            _switchModels.value?.map { switch ->
+                if (switch.id == switchId) switch.copy(isChecked = isOn) else switch
             }
 
         // Update the active menu items
@@ -70,16 +62,18 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    private fun resetSwitches() {
+        _switchModels.value = _switchModels.value?.map { it.copy(isChecked = false) }
+        _switchHistory.clear()
+        _activeMenuItems.value = mutableListOf(R.id.nav_main_screen)
+    }
+
     private fun updateActiveMenuItems() {
         val menuItems = mutableListOf<Int>()
-        menuItems.add(R.id.nav_main_screen) // Main screen is always first
+        menuItems.add(R.id.nav_main_screen)
 
-        // Add the first 4 switches in the history, excluding the most recent one (last opened)
-        val switchCount = _switchHistory.size
-        if (switchCount > 0) {
-            val switchesToAdd = _switchHistory.take(4)
-            menuItems.addAll(switchesToAdd)
-        }
+        val switchesToAdd = _switchHistory.take(4)
+        menuItems.addAll(switchesToAdd)
 
         _activeMenuItems.value = menuItems
     }

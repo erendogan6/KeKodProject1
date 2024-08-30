@@ -32,11 +32,12 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 (activity as? MainActivity)?.setBottomNavigationVisibility(!isOn)
             }
 
-            switchStates.observe(viewLifecycleOwner) { states ->
-                // Update switch states dynamically
+            switchModels.observe(viewLifecycleOwner) { switches ->
                 binding.run {
                     listOf(switch1, switch2, switch3, switch4, switch5).forEachIndexed { index, switch ->
-                        switch.isChecked = states[index + 1] ?: false
+                        val switchModel = switches[index]
+                        switch.text = switchModel.name
+                        switch.isChecked = switchModel.isChecked
                     }
                 }
             }
