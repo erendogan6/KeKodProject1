@@ -85,7 +85,9 @@ com.erendogan6.kekodproject1
 - **Mockito:** Mock nesneler oluşturup, davranışlarını simüle etmek ve test etmek için kullanılan kütüphane.
 - **Core Testing:** Jetpack bileşenlerinin test edilmesi için kullanılan yardımcı test kütüphaneleri.
 
-
+### Dil Desteği: ###
+- İngilizce %100
+- Türkçe %100
   
 ## Testler
 
