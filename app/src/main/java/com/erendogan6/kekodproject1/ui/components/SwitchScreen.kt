@@ -1,6 +1,8 @@
 package com.erendogan6.kekodproject1.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -34,55 +36,72 @@ fun switchFragmentContent(
     val context = LocalContext.current
     val welcomeText = context.getString(R.string.welcome_fragment, switchName)
 
-    gradientBackground {
-        Column(
-            modifier =
-                Modifier
-                    .fillMaxSize()
-                    .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
+    // Wrapper Column for entire content
+    Column(
+        modifier = Modifier.fillMaxSize().background(Color(0xFFE0F7FA)),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        // Green Box content with gradient background
+        Box(
+            modifier = Modifier.weight(0.8f),
         ) {
-            // Icon for the fragment
-            Icon(
-                painter = painterResource(id = iconRes),
-                contentDescription = "Icon for $switchName Fragment",
-                modifier =
-                    Modifier
-                        .size(120.dp)
-                        .padding(bottom = 16.dp),
-                tint = Color(0xFFFFEB3B),
-            )
+            gradientBackground {
+                Column(
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .padding(20.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                ) {
+                    // Icon for the fragment
+                    Icon(
+                        painter = painterResource(id = iconRes),
+                        contentDescription = "Icon for $switchName Fragment",
+                        modifier =
+                            Modifier
+                                .size(110.dp)
+                                .padding(bottom = 12.dp),
+                        tint = Color(0xFFFFEB3B),
+                    )
 
-            // Text for Detail Screen
-            Text(
-                text = welcomeText,
-                style =
-                    MaterialTheme.typography.bodyLarge.copy(
-                        fontFamily = FontFamily(Font(R.font.poppins_medium)),
-                        color = Color(0xFF333333),
-                        shadow =
-                            Shadow(
-                                color = Color(0x55000000),
-                                offset = Offset(2f, 2f),
-                                blurRadius = 4f,
+                    // Text for Detail Screen
+                    Text(
+                        text = welcomeText,
+                        style =
+                            MaterialTheme.typography.bodyLarge.copy(
+                                fontFamily = FontFamily(Font(R.font.poppins_medium)),
+                                color = Color(0xFF333333),
+                                shadow =
+                                    Shadow(
+                                        color = Color(0x55000000),
+                                        offset = Offset(2f, 2f),
+                                        blurRadius = 4f,
+                                    ),
+                                textAlign = TextAlign.Center,
+                                fontSize = 26.sp,
+                                fontWeight = FontWeight.Bold,
                             ),
-                        textAlign = TextAlign.Center,
-                        fontSize = 26.sp,
-                        fontWeight = FontWeight.Bold,
-                    ),
-                modifier = Modifier.padding(8.dp),
-            )
+                        modifier = Modifier.padding(6.dp),
+                    )
 
-            // Decorative line
-            HorizontalDivider(
-                modifier =
-                    Modifier
-                        .width(150.dp)
-                        .padding(top = 16.dp),
-                thickness = 6.dp,
-                color = Color(0xFF03A9F4),
-            )
+                    // Decorative line
+                    HorizontalDivider(
+                        modifier =
+                            Modifier
+                                .width(150.dp)
+                                .padding(top = 12.dp),
+                        thickness = 6.dp,
+                        color = Color(0xFF03A9F4),
+                    )
+                }
+            }
         }
+
+        // Lottie animation directly below the green box
+        lottieLoadingScreen(
+            modifier =
+                Modifier.weight(0.2f),
+        )
     }
 }

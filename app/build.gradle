@@ -57,6 +57,10 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation libs.core.ktx
 
+    //Lottie
+    implementation libs.lottie.compose
+
+
     // Test
     debugImplementation libs.androidx.ui.test.manifest
     androidTestImplementation libs.androidx.ui.test.junit4

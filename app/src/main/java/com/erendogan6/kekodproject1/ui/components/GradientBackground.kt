@@ -34,7 +34,7 @@ fun gradientBackground(
         Box(
             modifier =
                 Modifier
-                    .padding(top = 200.dp, bottom = 200.dp, start = 50.dp, end = 50.dp)
+                    .padding(top = 120.dp, bottom = 120.dp, start = 30.dp, end = 30.dp)
                     .background(
                         brush =
                             Brush.linearGradient(
