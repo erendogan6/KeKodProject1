@@ -9,29 +9,25 @@ class MainViewModel : ViewModel() {
     private val _isEgoSwitchOn = MutableLiveData<Boolean>(true)
     val isEgoSwitchOn: LiveData<Boolean> = _isEgoSwitchOn
 
-    // LiveData for BottomNavigationView visibility
-    private val _isBottomNavVisible = MutableLiveData<Boolean>(false)
-    val isBottomNavVisible: LiveData<Boolean> = _isBottomNavVisible
-
     private val _switchStates = MutableLiveData<Map<Int, Boolean>>()
     val switchStates: LiveData<Map<Int, Boolean>> = _switchStates
 
-    // List of active menu items for BottomNavigationView
-    private val _activeMenuItems = MutableLiveData<List<Int>>(listOf(R.id.nav_main_screen))
-    val activeMenuItems: LiveData<List<Int>> = _activeMenuItems
+    // Active Menu Items to be shown in BottomNavigationView (mutable list with the main screen initially)
+    private val _activeMenuItems = MutableLiveData<MutableList<Int>>(mutableListOf(R.id.nav_main_screen))
+    val activeMenuItems: LiveData<MutableList<Int>> = _activeMenuItems
 
-    // List to track the order in which switches are turned on
-    private val activeSwitchOrder = mutableListOf<Int>()
+    // List to keep track of the switches in the order they were turned ON
+    private val _switchHistory = mutableListOf<Int>()
 
     init {
         // Initialize all switches to be off, except the "Ego" switch
         _switchStates.value =
             mapOf(
-                1 to false, // Switch 1
-                2 to false, // Switch 2
-                3 to false, // Switch 3
-                4 to false, // Switch 4
-                5 to false, // Switch 5
+                1 to false,
+                2 to false,
+                3 to false,
+                4 to false,
+                5 to false,
             )
     }
 
@@ -41,11 +37,8 @@ class MainViewModel : ViewModel() {
         if (isOn) {
             // If Ego switch is on, disable all other switches
             _switchStates.value = _switchStates.value?.mapValues { false }
-            _isBottomNavVisible.value = false // Hide BottomNavigationView
-            _activeMenuItems.value = listOf(R.id.nav_main_screen) // Reset to main screen only
-            activeSwitchOrder.clear() // Clear the active switch order
-        } else {
-            _isBottomNavVisible.value = true // Show BottomNavigationView
+            _switchHistory.clear() // Clear history when "Ego" switch is turned ON
+            _activeMenuItems.value = mutableListOf(R.id.nav_main_screen) // Reset to main screen only
         }
     }
 
@@ -63,34 +56,31 @@ class MainViewModel : ViewModel() {
 
         // Update the active menu items
         if (isOn) {
-            // Add switch to order list if it's being turned on
-            if (!activeSwitchOrder.contains(switchId)) {
-                activeSwitchOrder.add(switchId)
+            // Add switch to history list if it's not already there
+            if (!_switchHistory.contains(switchId) && _switchHistory.size < 4) {
+                _switchHistory.add(switchId)
+                updateActiveMenuItems()
             }
         } else {
-            // Remove switch from order list if it's being turned off
-            activeSwitchOrder.remove(switchId)
-        }
-
-        updateActiveMenuItems()
-    }
-
-    // Method to update the active menu items based on the order of switches
-    private fun updateActiveMenuItems() {
-        val updatedMenuItems = mutableListOf(R.id.nav_main_screen) // Always include the main screen
-
-        // Add up to the first 4 switches that are active
-        val maxSwitchesToAdd = 4
-        var switchesAdded = 0
-
-        for (switchId in activeSwitchOrder) {
-            if (switchesAdded >= maxSwitchesToAdd) break
-            if (_switchStates.value?.get(switchId) == true) { // Only add if the switch is on
-                updatedMenuItems.add(switchId)
-                switchesAdded++
+            // Remove switch from history list and active menu if turned OFF
+            _switchHistory.remove(switchId)
+            if (_switchHistory.size < 4) {
+                updateActiveMenuItems()
             }
         }
+    }
 
-        _activeMenuItems.value = updatedMenuItems
+    private fun updateActiveMenuItems() {
+        val menuItems = mutableListOf<Int>()
+        menuItems.add(R.id.nav_main_screen) // Main screen is always first
+
+        // Add the first 4 switches in the history, excluding the most recent one (last opened)
+        val switchCount = _switchHistory.size
+        if (switchCount > 0) {
+            val switchesToAdd = _switchHistory.take(4)
+            menuItems.addAll(switchesToAdd)
+        }
+
+        _activeMenuItems.value = menuItems
     }
 }
