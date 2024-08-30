@@ -20,6 +20,9 @@ class MainViewModel : ViewModel() {
     private val _activeMenuItems = MutableLiveData<List<Int>>(listOf(R.id.nav_main_screen))
     val activeMenuItems: LiveData<List<Int>> = _activeMenuItems
 
+    // List to track the order in which switches are turned on
+    private val activeSwitchOrder = mutableListOf<Int>()
+
     init {
         // Initialize all switches to be off, except the "Ego" switch
         _switchStates.value =
@@ -40,6 +43,7 @@ class MainViewModel : ViewModel() {
             _switchStates.value = _switchStates.value?.mapValues { false }
             _isBottomNavVisible.value = false // Hide BottomNavigationView
             _activeMenuItems.value = listOf(R.id.nav_main_screen) // Reset to main screen only
+            activeSwitchOrder.clear() // Clear the active switch order
         } else {
             _isBottomNavVisible.value = true // Show BottomNavigationView
         }
@@ -58,14 +62,35 @@ class MainViewModel : ViewModel() {
             }
 
         // Update the active menu items
-        val updatedMenuItems = _activeMenuItems.value?.toMutableList() ?: mutableListOf()
         if (isOn) {
-            if (updatedMenuItems.size < 5) { // Max 5 items (including main screen)
-                updatedMenuItems.add(switchId)
+            // Add switch to order list if it's being turned on
+            if (!activeSwitchOrder.contains(switchId)) {
+                activeSwitchOrder.add(switchId)
             }
         } else {
-            updatedMenuItems.remove(switchId)
+            // Remove switch from order list if it's being turned off
+            activeSwitchOrder.remove(switchId)
         }
+
+        updateActiveMenuItems()
+    }
+
+    // Method to update the active menu items based on the order of switches
+    private fun updateActiveMenuItems() {
+        val updatedMenuItems = mutableListOf(R.id.nav_main_screen) // Always include the main screen
+
+        // Add up to the first 4 switches that are active
+        val maxSwitchesToAdd = 4
+        var switchesAdded = 0
+
+        for (switchId in activeSwitchOrder) {
+            if (switchesAdded >= maxSwitchesToAdd) break
+            if (_switchStates.value?.get(switchId) == true) { // Only add if the switch is on
+                updatedMenuItems.add(switchId)
+                switchesAdded++
+            }
+        }
+
         _activeMenuItems.value = updatedMenuItems
     }
 }
