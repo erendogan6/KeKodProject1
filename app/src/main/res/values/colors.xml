@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
     <color name="primary">#03A9F4</color>
-    <color name="colorAccentVariant">#FF4081</color>
+    <color name="background">#E0F7FA</color>
+    <color name="switchIconColor">#FFEB3B</color>
+    <color name="switchTextColor">#212121</color>
+    <color name="switchThumbColor">#FF4081</color> <!-- Pink for enabled thumb -->
+    <color name="switchTrackColor">#FF80AB</color> <!-- Light pink for enabled track -->
+    <color name="switchThumbColorDisabled">#BDBDBD</color> <!-- Light gray for disabled thumb -->
+    <color name="switchTrackColorDisabled">#E0E0E0</color> <!-- Light gray for disabled track -->
 </resources>
