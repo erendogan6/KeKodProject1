@@ -16,6 +16,10 @@ class MainViewModel : ViewModel() {
     private val _switchStates = MutableLiveData<Map<Int, Boolean>>()
     val switchStates: LiveData<Map<Int, Boolean>> = _switchStates
 
+    // List of active menu items for BottomNavigationView
+    private val _activeMenuItems = MutableLiveData<List<Int>>(listOf(R.id.nav_main_screen))
+    val activeMenuItems: LiveData<List<Int>> = _activeMenuItems
+
     init {
         // Initialize all switches to be off, except the "Ego" switch
         _switchStates.value =
@@ -35,6 +39,7 @@ class MainViewModel : ViewModel() {
             // If Ego switch is on, disable all other switches
             _switchStates.value = _switchStates.value?.mapValues { false }
             _isBottomNavVisible.value = false // Hide BottomNavigationView
+            _activeMenuItems.value = listOf(R.id.nav_main_screen) // Reset to main screen only
         } else {
             _isBottomNavVisible.value = true // Show BottomNavigationView
         }
@@ -51,5 +56,16 @@ class MainViewModel : ViewModel() {
             _switchStates.value?.toMutableMap()?.apply {
                 this[switchId] = isOn
             }
+
+        // Update the active menu items
+        val updatedMenuItems = _activeMenuItems.value?.toMutableList() ?: mutableListOf()
+        if (isOn) {
+            if (updatedMenuItems.size < 5) { // Max 5 items (including main screen)
+                updatedMenuItems.add(switchId)
+            }
+        } else {
+            updatedMenuItems.remove(switchId)
+        }
+        _activeMenuItems.value = updatedMenuItems
     }
 }
