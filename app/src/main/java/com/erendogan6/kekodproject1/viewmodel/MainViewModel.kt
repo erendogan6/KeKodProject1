@@ -51,6 +51,10 @@ class MainViewModel(
     // List to keep track of the switches in the order they were turned ON
     private val _switchHistory = mutableListOf<Int>()
 
+    fun updateSwitchModels(models: List<SwitchModel>) {
+        _switchModels.value = models
+    }
+
     fun onEgoSwitchChanged(isOn: Boolean) {
         _isEgoSwitchOn.value = isOn
         if (isOn) {

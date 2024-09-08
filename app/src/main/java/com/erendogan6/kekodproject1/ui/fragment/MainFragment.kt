@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.erendogan6.kekodproject1.R
 import com.erendogan6.kekodproject1.databinding.FragmentMainBinding
+import com.erendogan6.kekodproject1.model.SwitchModel
 import com.erendogan6.kekodproject1.ui.activity.MainActivity
 import com.erendogan6.kekodproject1.viewmodel.MainViewModel
 
@@ -25,6 +26,45 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         // Set up observers and listeners
         setupObservers()
         setupSwitchListeners()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateTexts()
+    }
+
+    private fun updateTexts() {
+        val switchModels =
+            listOf(
+                SwitchModel(
+                    1,
+                    getString(R.string.switch_happy),
+                    R.drawable.ic_happy,
+                ),
+                SwitchModel(
+                    2,
+                    getString(R.string.switch_money),
+                    R.drawable.ic_money,
+                ),
+                SwitchModel(
+                    3,
+                    getString(R.string.switch_peace),
+                    R.drawable.ic_peace,
+                ),
+                SwitchModel(
+                    4,
+                    getString(R.string.switch_friend),
+                    R.drawable.ic_friend,
+                ),
+                SwitchModel(
+                    5,
+                    getString(R.string.switch_evolution),
+                    R.drawable.ic_evolution,
+                ),
+            )
+
+        // ViewModel'e güncellenmiş verileri geç
+        viewModel.updateSwitchModels(switchModels)
     }
 
     private fun setupObservers() =
